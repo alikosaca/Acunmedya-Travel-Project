@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Acunmedya_Travel_Project.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
