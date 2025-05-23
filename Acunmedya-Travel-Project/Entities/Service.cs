@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,9 +8,13 @@ namespace Acunmedya_Travel_Project.Entities
 {
     public class Service
     {
-        public int ServiceID { get; set; }
-        public string Title { get; set; }
-        public string Descreption { get; set; }
-        public string ImageUrl { get; set; }
+        [Key]
+        public int service_id { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public string image_url { get; set; }
+        public int total_tickets { get; set; }
+        public int sold_ticket { get; set; }
+        public decimal price { get; set; }
     }
 }

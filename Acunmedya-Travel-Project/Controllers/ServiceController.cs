@@ -26,6 +26,7 @@ namespace Acunmedya_Travel_Project.Controllers
         [HttpPost]
         public ActionResult AddServices(Service service)
         {
+            service.sold_ticket = 0;
             _context.Services.Add(service);
             _context.SaveChanges();
 
@@ -43,16 +44,17 @@ namespace Acunmedya_Travel_Project.Controllers
         public ActionResult UpdateServices(int id)
         {
             var values = _context.Services.Find(id);
+
             return View(values);
         }
         [HttpPost]
         public ActionResult UpdateServices(Service model)
         {
-            var value = _context.Services.Find(model.ServiceID);
-            value.Descreption = model.Descreption;
-            value.ImageUrl = model.ImageUrl;
-            value.Title = model.Title;
-
+            var value = _context.Services.Find(model.service_id);
+            value.description = model.description;
+            value.image_url = model.image_url;
+            value.title = model.title;
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }
