@@ -3,11 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
-    /**/
-    var totalTours = Model.Count;
-    // Her tur için rastgele bir oran belirlemek için Random oluşturalım
-    Random rnd = new Random();
-    /**/
+
 }
 
 
@@ -110,7 +106,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Silme işlemi için yönlendirme
-                window.location.href = `/Service/DeleteServices/${id}`;
+                window.location.href = `/Service/Index/${id}`;
             }
         });
     }

@@ -1,0 +1,209 @@
+﻿@model Acunmedya_Travel_Project.Entities.Testimonial
+@{
+    ViewBag.Title = "Yeni Müşteri Yorumu";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid p-4">
+    <h2 class="text-light mb-4 pb-2" style="border-bottom: 2px solid rgba(0, 123, 255, 0.3); font-weight: 300; letter-spacing: 1px;">
+        <i class="bi bi-chat-quote me-2 text-primary"></i>
+        Yeni Müşteri Yorumu Ekle
+    </h2>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h5 class="m-0"><i class="bi bi-person-plus me-2 text-info"></i>Müşteri Bilgilerini Girin</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Name" class="form-label text-light">Ad</label>
+                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", placeholder = "Müşteri adını giriniz" })
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="Surname" class="form-label text-light">Soyad</label>
+                                    @Html.TextBoxFor(x => x.Surname, new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", placeholder = "Müşteri soyadını giriniz" })
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="form-group">
+                                <label for="ImageUrl" class="form-label text-light">Fotoğraf URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" style="background-color: #131824; color: #ffffff; border-color: #1a1f2c;">
+                                        <i class="bi bi-image"></i>
+                                    </span>
+                                    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", placeholder = "Müşteri fotoğrafı URL'sini giriniz" })
+                                </div>
+                                <div class="form-text text-muted">Kare formatta müşteri fotoğrafı tercih edilir (300x300px önerilen)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="form-group">
+                                <label for="Description" class="form-label text-light">Yorum</label>
+                                @Html.TextAreaFor(x => x.Description, new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", rows = "5", placeholder = "Müşteri yorumunu giriniz" })
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="~/Testimonial/Index" class="btn btn-outline-danger">
+                                <i class="bi bi-x-circle me-2"></i>Vazgeç
+                            </a>
+                            
+                            <button type="button" class="btn btn-outline-success" id="btnAddTestimonial" onclick="confirmAdd()">
+                                <i class="bi bi-plus-circle me-2"></i>Yorumu Ekle
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h6 class="m-0"><i class="bi bi-eye me-2 text-info"></i>Önizleme</h6>
+                </div>
+                <div class="card-body">
+                    <div class="testimonial-preview p-3 rounded" style="background-color: #131824; border-color: #1a1f2c;">
+                        <div class="d-flex mb-3">
+                            <img id="profilePreview" src="https://via.placeholder.com/64x64?text=?" class="rounded-circle me-3" width="64" height="64" style="border: 2px solid #1a1f2c; object-fit: cover;" />
+                            <div>
+                                <h5 id="namePreview" class="text-light mb-1">Ad Soyad</h5>
+                                <div class="text-warning mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-text p-3 rounded" style="background-color: rgba(255, 255, 255, 0.03); border-left: 3px solid rgba(0, 123, 255, 0.5);">
+                            <p id="descriptionPreview" class="text-light mb-0" style="font-style: italic;">
+                                <i class="bi bi-quote text-primary me-2" style="font-size: 1.2rem;"></i>
+                                Yorum metni burada görünecek...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h6 class="m-0"><i class="bi bi-lightbulb me-2 text-warning"></i>İpuçları</h6>
+                </div>
+                <div class="card-body text-light">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Gerçek müşteri bilgileri kullanın</li>
+                        <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Yüksek kaliteli fotoğraflar tercih edin</li>
+                        <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Yorumlar kısa ve öz olmalıdır (max. 150 kelime)</li>
+                        <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Deneyime odaklanan içerikler daha etkilidir</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Görsel ve metin önizleme işlemleri için
+    document.addEventListener('DOMContentLoaded', function() {
+        const name = document.getElementById('@Html.IdFor(x => x.Name)');
+        const surname = document.getElementById('@Html.IdFor(x => x.Surname)');
+        const imageUrl = document.getElementById('@Html.IdFor(x => x.ImageUrl)');
+        const description = document.getElementById('@Html.IdFor(x => x.Description)');
+        
+        const namePreview = document.getElementById('namePreview');
+        const profilePreview = document.getElementById('profilePreview');
+        const descriptionPreview = document.getElementById('descriptionPreview');
+        
+        // Ad Soyad önizleme
+        function updateNamePreview() {
+            const nameVal = name.value || '';
+            const surnameVal = surname.value || '';
+            
+            if (nameVal || surnameVal) {
+                namePreview.innerText = `${nameVal} ${surnameVal}`.trim();
+            } else {
+                namePreview.innerText = 'Ad Soyad';
+            }
+        }
+        
+        // Resim önizleme
+        imageUrl.addEventListener('input', function() {
+            profilePreview.src = this.value || 'https://via.placeholder.com/64x64?text=?';
+        });
+        
+        // Ad değiştiğinde önizleme güncelleme
+        name.addEventListener('input', updateNamePreview);
+        
+        // Soyad değiştiğinde önizleme güncelleme
+        surname.addEventListener('input', updateNamePreview);
+        
+        // Yorum önizleme
+        description.addEventListener('input', function() {
+            const quote = '<i class="bi bi-quote text-primary me-2" style="font-size: 1.2rem;"></i>';
+            descriptionPreview.innerHTML = quote + (this.value || 'Yorum metni burada görünecek...');
+        });
+    });
+    
+    // Form doğrulama ve gönderme işlemi
+    function confirmAdd() {
+        // Form elementini al
+        var form = document.querySelector('form');
+        
+        // Form doğrulaması
+        var name = document.getElementById('@Html.IdFor(x => x.Name)').value;
+        var surname = document.getElementById('@Html.IdFor(x => x.Surname)').value;
+        var imageUrl = document.getElementById('@Html.IdFor(x => x.ImageUrl)').value;
+        var description = document.getElementById('@Html.IdFor(x => x.Description)').value;
+        
+        if (!name || !surname || !description) {
+            Swal.fire({
+                background: '#000',
+                color: '#fff',
+                title: "Eksik Bilgi",
+                text: "Lütfen ad, soyad ve yorum alanlarını doldurunuz!",
+                icon: "error",
+                confirmButtonColor: "#3085d6",
+            });
+            return false;
+        }
+        
+        // Onaylama penceresi
+        Swal.fire({
+            background: '#000',
+            color: '#fff',
+            title: "Müşteri Yorumu Ekle",
+            text: "Bu yorumu eklemek istediğinize emin misiniz?",
+            imageUrl: imageUrl || 'https://via.placeholder.com/100x100?text=?',
+            imageWidth: 100,
+            imageHeight: 100,
+            imageAlt: name + ' ' + surname,
+            imageClass: "rounded-circle",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, ekle!",
+            cancelButtonText: "İptal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Form gönderimi
+                form.submit();
+            }
+        });
+    }
+</script>
+

@@ -1,0 +1,117 @@
+﻿@model List<Acunmedya_Travel_Project.Entities.Sponsor>
+@{
+    ViewBag.Title = "Sponsorlar";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid p-4">
+    <h2 class="text-light mb-4 pb-2" style="border-bottom: 2px solid rgba(0, 123, 255, 0.3); font-weight: 300; letter-spacing: 1px;">
+        <i class="bi bi-briefcase me-2 text-primary"></i>
+        Sponsorlar
+    </h2>
+
+    <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
+        <div class="card-header text-light d-flex justify-content-between align-items-center" style="background-color: #0d1321; border-color: #1a1f2c;">
+            <h5 class="m-0"><i class="bi bi-list me-2 text-info"></i>Sponsor Listesi</h5>
+            <a href="/Sponsor/AddSponsors" class="btn btn-warning btn-sm">
+                <i class="bi bi-plus-circle me-2"></i>Yeni Sponsor Ekle
+            </a>
+        </div>
+        <div class="card-body">
+            @if (Model != null && Model.Count > 0)
+            {
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col">
+                            <div class="card h-100" style="background-color: #131824; border-color: #1a1f2c;">
+                                <div class="card-header d-flex justify-content-between align-items-center" style="background-color: rgba(13, 19, 33, 0.7); border-color: #1a1f2c;">
+                                    <small class="text-muted">#@item.SponsorID</small>
+                                    <div class="btn-group">
+                                        <a href="~/Sponsor/UpdateSponsors/@item.SponsorID" class="btn btn-info">
+                                            <i class="bi bi-pencil me-1"></i> Düzenle
+                                        </a>
+                                        <button class="btn btn-danger" onclick="confirmDelete(@item.SponsorID, 'Sponsor', '@item.ImageUrl')">
+                                            <i class="bi bi-trash me-1"></i> Sil
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body d-flex align-items-center justify-content-center p-4" style="background-color: rgba(255, 255, 255, 0.03); min-height: 180px;">
+                                    <img src="@item.ImageUrl" class="img-fluid" style="max-height: 150px; max-width: 100%;" 
+                                         onerror="this.src='https://via.placeholder.com/400x200?text=Logo+Bulunamadı'; this.onerror='';" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Henüz sponsor logosu bulunmuyor. Yeni eklemek için üstteki butonu kullanabilirsiniz.
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h6 class="m-0"><i class="bi bi-info-circle me-2 text-info"></i>Sponsor Logoları Hakkında</h6>
+                </div>
+                <div class="card-body text-light">
+                    <p>Sponsor logoları, şirketinizin anlaşmalı olduğu markaları temsil eder. Logolar web sitenizin sponsor bölümünde gösterilir.</p>
+                    <ul>
+                        <li>Logoların yüksek kaliteli ve şeffaf arka planlı olması önerilir</li>
+                        <li>Logoların mümkün olduğunca aynı boyutlarda olması görsel bütünlük sağlar</li>
+                        <li>WebP, PNG veya SVG formatındaki görseller en iyi sonuçları verir</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h6 class="m-0"><i class="bi bi-graph-up me-2 text-info"></i>Sponsor İstatistikleri</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col">
+                            <div class="p-3 border rounded" style="background-color: #131824; border-color: #1a1f2c !important;">
+                                <h3 class="text-warning">@(Model?.Count ?? 0)</h3>
+                                <p class="text-light mb-0">Toplam Sponsor Logosu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(id, name, imageUrl) {
+        Swal.fire({
+            background: '#000',
+            color: '#fff',
+            title: `Bu sponsoru silmek istediğinize emin misiniz?`,
+            text: "Bu işlem geri alınamaz!",
+            imageUrl: imageUrl,
+            imageWidth: 200,
+            imageHeight: 100,
+            imageAlt: 'Sponsor Logo',
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, sil!",
+            cancelButtonText: "İptal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/Sponsor/DeleteSponsors/${id}`;
+            }
+        });
+    }
+</script>
