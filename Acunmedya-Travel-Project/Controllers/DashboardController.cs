@@ -8,6 +8,7 @@ using Acunmedya_Travel_Project.Concrete;
 
 namespace Acunmedya_Travel_Project.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         Acunmedya_Travel_Project.Concrete.Context _context = new Acunmedya_Travel_Project.Concrete.Context();
