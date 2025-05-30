@@ -14,9 +14,8 @@ namespace Acunmedya_Travel_Project.Controllers
         Acunmedya_Travel_Project.Concrete.Context _context = new Acunmedya_Travel_Project.Concrete.Context();
         public ActionResult Index()
         {
-            FormsAuthentication.SignOut(); //var olan bir kullanıcı varsa çıkış yap
-            Session.Abandon(); //Session'u varsa sil
-            //neden yapıyoruz çünkü Login sayafsına geldiyse veriler silinip baştan giriş yapmasını sağlamak için
+            FormsAuthentication.SignOut();
+            Session.Abandon();
             return View();
         }
         [HttpPost]
@@ -28,13 +27,11 @@ namespace Acunmedya_Travel_Project.Controllers
                 ModelState.AddModelError(string.Empty, "Kullanıcı adı ve şifre hatalı");
                 return View(model);
             }
-            FormsAuthentication.SetAuthCookie(model.UserName, false); //Cookie oluştur, UserName atıyoruz. false -> tarayıcıdan çıkış yapıldığında Cookie silinsin
+            FormsAuthentication.SetAuthCookie(model.UserName, false); 
 
-            Session["currentUser"] = model.UserName; //Viewbag gibi düşünebiliriz. Burada oluşturup istediğimiz sayafada kullanabiliriz. örn/kullanıcı adımız olursa bunu çağırıyoruz
+            Session["currentUser"] = model.UserName; 
 
-
-            return RedirectToAction("Index", "Service"); //Service'in index'ine yönlendir
-            //return View();
+            return RedirectToAction("Index", "Service");
         }
     }
 }
