@@ -24,9 +24,6 @@ namespace Acunmedya_Travel_Project.Concrete
             modelBuilder.Entity<Service>().Property(e => e.title).HasMaxLength(150);
             modelBuilder.Entity<Service>().Property(e => e.description).HasColumnType("text");
             modelBuilder.Entity<Service>().Property(e => e.image_url).HasColumnType("nvarchar(max)");
-            modelBuilder.Entity<Service>().Property(e => e.total_tickets).IsOptional();
-            modelBuilder.Entity<Service>().Property(e => e.sold_ticket).IsOptional();
-            modelBuilder.Entity<Service>().Property(e => e.price).HasColumnType("money");
         }
     }
 }

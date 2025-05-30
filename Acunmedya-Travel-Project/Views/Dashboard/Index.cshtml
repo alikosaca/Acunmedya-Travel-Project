@@ -1,0 +1,412 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid p-4">
+    <h2 class="text-light mb-4 pb-2">
+        <i class="bi bi-speedometer2 me-2 text-success"></i>
+        Dashboard
+
+
+    </h2>
+
+    <div class="row mb-4">
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-body text-center">
+                    <div class="rounded-circle p-3 bg-primary bg-opacity-25 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-luggage" style="font-size: 35px;"></i>
+                    </div>
+                    <h3 class="text-light fw-bold">@ViewBag.TotalTours</h3>
+                    <p class="text-light mb-0">Toplam Turlar</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-body text-center">
+                    <div class="rounded-circle p-3 bg-behance bg-opacity-25 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-person-circle" style="font-size: 35px;"></i>
+                    </div>
+                    <h3 class="text-light fw-bold">@ViewBag.TotalAdmin</h3>
+                    <p class="text-light mb-0">Admin Sayısı</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-body text-center">
+                    <div class="rounded-circle p-3 bg-warning bg-opacity-25 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-pen" style="font-size: 35px;"></i>
+                    </div>
+                    <h3 class="text-light fw-bold">@ViewBag.TotalSponsors</h3>
+                    <p class="text-light mb-0">Sponsor Sayısı</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-body text-center">
+                    <div class="rounded-circle p-3 bg-info bg-opacity-25 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-people-fill" style="font-size: 30px;"></i>
+                    </div>
+                    <h3 class="text-light fw-bold">@ViewBag.TotalTestimonial</h3>
+                    <p class="text-light mb-0">Referanslar</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-body text-center">
+                    <div class="rounded-circle p-3  bg-success bg-opacity-25 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-wallet2" style="font-size: 30px;"></i>
+
+                    </div>
+                    <h3 class="text-success fw-bold">₺@ViewBag.TotalPrice</h3>
+                    <p class="text-light mb-0">Toplam Kazanç</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-body text-center">
+                    <div class="rounded-circle p-3 bg-danger bg-opacity-25 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-ticket-perforated-fill" style="font-size: 30px;"></i>
+                    </div>
+                    <h3 class="text-light fw-bold">@ViewBag.TotalSoldTickets/@ViewBag.TotalTickets</h3>
+                    <p class="text-light mb-0">Satılan Bilet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6 mb-4">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h5 class="mb-0">
+                        <i class="bi bi-calendar-check-fill text-success me-2"></i>
+                        Son Rezervasyonlar
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-dark table-hover table-striped" style="background-color: rgba(33, 37, 41, 0.9);">
+                        <thead>
+                            <tr>
+                                <th style="color: #ffffff;">Tur</th>
+                                <th style="color: #ffffff;">Doluluk (0-100)</th>
+                                <th style="color: #ffffff;">Kazanç</th>
+                                <th style="color: #ffffff;">Durum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.LastestBookings != null)
+                            {
+                                foreach (var item in ViewBag.LastestBookings)
+                                {
+                                    double occupancyRate = item.total_tickets > 0 ? (double)item.sold_ticket / item.total_tickets * 100 : 0;
+                                    decimal revenue = item.price * item.sold_ticket;
+                                    string badgeColor = "bg-danger";
+                                    string statusColor = "text-danger";
+
+                                    if (occupancyRate >= 80)
+                                    {
+                                        badgeColor = "bg-success";
+                                        statusColor = "text-success";
+                                    }
+                                    else if (occupancyRate >= 50)
+                                    {
+                                        badgeColor = "bg-warning";
+                                        statusColor = "text-warning";
+                                    }
+
+                                    <tr>
+                                        <td style="color: #ffffff;"><strong>@item.title</strong></td>
+                                        <td>
+                                            <span class="badge @badgeColor">@item.sold_ticket/@item.total_tickets</span>
+                                            <small class="text-muted ms-1">%@Math.Round(occupancyRate, 1)</small>
+                                        </td>
+                                        <td style="color: #28a745; font-weight: bold;">₺@revenue.ToString("N0")</td>
+                                        <td><i class="bi bi-circle-fill @statusColor" style="font-size: 8px;"></i></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center" style="color: #ffffff;">Henüz rezervasyon bulunmuyor.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h5 class="mb-0">
+                        <i class="bi bi-bar-chart-fill text-success me-2"></i>
+                        Tur Doluluk Oranları
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="occupancyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h5 class="mb-0">
+                        <i class="bi bi-pie-chart-fill text-success me-2"></i>
+                        Kıtalara Göre Tur Dağılımı
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="continentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 mb-4">
+            <div class="card" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle-fill text-success me-2"></i>
+                        Sistem Özeti
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: rgba(13, 110, 253, 0.1); border-radius: 10px;">
+                                <h6 class="text-primary mb-2">
+                                    <i class="bi bi-clock-fill me-1"></i>
+                                    Son Güncelleme
+                                </h6>
+                                <p class="text-light mb-0 small">@DateTime.Now.ToString("dd.MM.yyyy HH:mm")</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: rgba(25, 135, 84, 0.1); border-radius: 10px;">
+                                <h6 class="text-success mb-2">
+                                    <i class="bi bi-cpu me-1"></i>
+                                    Sistem Durumu
+                                </h6>
+                                <p class="mb-0"><span class="badge bg-success px-2 py-1">Aktif</span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: rgba(255, 193, 7, 0.1); border-radius: 10px;">
+                                <h6 class="text-warning mb-2">
+                                    <i class="bi bi-star-fill me-1"></i>
+                                    En Popüler Tur
+                                </h6>
+                                <p class="mb-0"><span class="badge bg-warning px-2 py-1">Bali (100/100)</span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: rgba(13, 202, 240, 0.1); border-radius: 10px;">
+                                <h6 class="text-info mb-2">
+                                    <i class="bi bi-currency-dollar me-1"></i>
+                                    Toplam Gelir
+                                </h6>
+                                <p class="mb-0"><span class="badge bg-info px-2 py-1">₺@ViewBag.TotalPrice</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const continentChart = new Chart(
+            document.getElementById('continentChart'),
+            {
+                type: 'doughnut',
+                data: {
+                    labels: ['Avrupa', 'Asya', 'Amerika', 'Afrika', 'Avustralya'],
+                    datasets: [{
+                        data: [@ViewBag.TotalEuropeTur, @ViewBag.TotalAsiaTur, @ViewBag.TotalAmericaTur, @ViewBag.TotalAfricaTur, @ViewBag.TotalAustrliaTur],
+                        backgroundColor: [
+                            'rgba(13, 110, 253, 0.8)',
+                            'rgba(25, 135, 84, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(13, 202, 240, 0.8)',
+                            'rgba(108, 117, 125, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(13, 110, 253, 1)',
+                            'rgba(25, 135, 84, 1)',
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(13, 202, 240, 1)',
+                            'rgba(108, 117, 125, 1)'
+                        ],
+                        borderWidth: 2,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff',
+                                padding: 20,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        );
+
+        // ✅ DÜZELTİLMİŞ ARRAY OLUŞTURMA
+        var tourNames = [
+            @Html.Raw(string.Join(",", 
+                ViewBag.LastestBookings != null ? 
+                ((IEnumerable<dynamic>)ViewBag.LastestBookings).Select(item => $"'{item.title}'") : 
+                new string[0]))
+        ];
+
+        var occupancyRates = [
+            @Html.Raw(string.Join(",", 
+                ViewBag.LastestBookings != null ? 
+                ((IEnumerable<dynamic>)ViewBag.LastestBookings).Select(item => 
+                {
+                    double occupancyRate = item.total_tickets > 0 ? (double)item.sold_ticket / item.total_tickets * 100 : 0;
+                    return Math.Round(occupancyRate, 1).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                }) : 
+                new string[0]))
+        ];
+
+        var backgroundColors = [
+            @Html.Raw(string.Join(",", 
+                ViewBag.LastestBookings != null ? 
+                ((IEnumerable<dynamic>)ViewBag.LastestBookings).Select(item => 
+                {
+                    double occupancyRate = item.total_tickets > 0 ? (double)item.sold_ticket / item.total_tickets * 100 : 0;
+                    if (occupancyRate >= 80) return "'rgba(25, 135, 84, 0.7)'";
+                    else if (occupancyRate >= 50) return "'rgba(255, 193, 7, 0.7)'";
+                    else return "'rgba(220, 53, 69, 0.7)'";
+                }) : 
+                new string[0]))
+        ];
+
+        var borderColors = [
+            @Html.Raw(string.Join(",", 
+                ViewBag.LastestBookings != null ? 
+                ((IEnumerable<dynamic>)ViewBag.LastestBookings).Select(item => 
+                {
+                    double occupancyRate = item.total_tickets > 0 ? (double)item.sold_ticket / item.total_tickets * 100 : 0;
+                    if (occupancyRate >= 80) return "'rgba(25, 135, 84, 1)'";
+                    else if (occupancyRate >= 50) return "'rgba(255, 193, 7, 1)'";
+                    else return "'rgba(220, 53, 69, 1)'";
+                }) : 
+                new string[0]))
+        ];
+
+        // Debug için console'a yazdır
+        console.log('Tour Names:', tourNames);
+        console.log('Occupancy Rates:', occupancyRates);
+        console.log('Background Colors:', backgroundColors);
+        console.log('Border Colors:', borderColors);
+
+        const occupancyChart = new Chart(
+            document.getElementById('occupancyChart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: tourNames,
+                    datasets: [{
+                        label: 'Doluluk Oranı (%)',
+                        data: occupancyRates,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            min: 0,        // ✅ ZORUNLU: 0'dan başla
+                            max: 100,      // ✅ ZORUNLU: 100'de bitir
+                            stepSize: 10,  // ✅ 10'ar 10'ar artır (0,10,20,30...100)
+                            ticks: {
+                                color: '#ffffff',
+                                stepSize: 10,
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Doluluk Oranı (0-100%)',
+                                color: '#ffffff'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#ffffff',
+                                maxRotation: 60,
+                                minRotation: 0
+                            },
+                            grid: {
+                                color: 'rgba(255, 0, 0, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ffffff'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Doluluk: ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        );
+    });
+</script>

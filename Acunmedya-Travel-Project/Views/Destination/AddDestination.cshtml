@@ -1,0 +1,191 @@
+﻿@model Acunmedya_Travel_Project.Entities.Destination
+@{
+    ViewBag.Title = "Yeni Tur Ekle";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid p-4">
+    <h2 class="text-light mb-4 pb-2">
+        <i class="bi bi-plus-circle me-2"></i>
+        Yeni Tur Ekle
+    </h2>
+
+    <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
+        <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+            <h5 class="m-0"><i class="bi bi-geo-alt me-2 text-info" style="margin-right:5px;"></i>Tur Bilgilerini Girin</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="title" class="form-label text-light">Tur Adı</label>
+                            @Html.TextBoxFor(x => x.title, new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", placeholder = "Tur adını giriniz" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="image_url" class="form-label text-light">Resim URL</label>
+                            @Html.TextBoxFor(x => x.image_url, new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", placeholder = "Resim URL'sini giriniz" })
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kategori ve Gün Sayısı -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="category_id" class="form-label text-light">Kategori</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="background-color: #131824; color: #ffffff; border-color: #1a1f2c;">
+                                    <i class="bi bi-tag"></i>
+                                </span>
+                                @Html.DropDownListFor(x => x.category_id,
+                                    ViewBag.Categories as SelectList,
+                                    "-- Kategori Seçin --",
+                                    new { @class = "form-select", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="days_trip" class="form-label text-light">Seyahat Süresi (Gün)</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="background-color: #131824; color: #ffffff; border-color: #1a1f2c;">
+                                    <i class="bi bi-calendar-day"></i>
+                                </span>
+                                @Html.TextBoxFor(x => x.days_trip, new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", placeholder = "1", type = "number", min = "1", max = "30" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="price" class="form-label text-light">Tur Fiyatı</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="background-color: #131824; color: #ffffff; border-color: #1a1f2c;">₺</span>
+                                @Html.TextBoxFor(x => x.price, "{0:N2}", new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", placeholder = "0.00", type = "number", step = "0.01", min = "0" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="total_tickets" class="form-label text-light">Toplam Bilet Sayısı</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="background-color: #131824; color: #ffffff; border-color: #1a1f2c;"><i class="bi bi-ticket-perforated"></i></span>
+                                @Html.TextBoxFor(x => x.total_tickets, new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", placeholder = "0", type = "number", min = "0" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="description" class="form-label text-light">Tur Açıklaması</label>
+                    @Html.TextAreaFor(x => x.description, new { @class = "form-control", style = "background-color: #131824; color: #ffffff; border-color: #1a1f2c;", rows = "8", placeholder = "Tur açıklamasını giriniz" })
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="~/Destination/Index" class="btn btn-danger">
+                        <i class="bi bi-x-circle me-2" style="margin-right:5px;"></i>Vazgeç
+                    </a>
+
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-plus-circle me-2" style="margin-right:5px;"></i>Tur Ekle
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
+                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
+                    <h6 class="m-0"><i class="bi bi-info-circle me-2 text-info"></i>Tur Önizleme</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <img id="imagePreview" src="https://via.placeholder.com/400x300?text=Resim+Önizleme" class="img-fluid rounded" style="max-height: 200px;" />
+                    </div>
+                    <h5 id="titlePreview" class="text-center text-light mb-3">Tur Adı</h5>
+                    <div class="d-flex justify-content-center">
+                        <div class="badge bg-primary me-2 p-2">
+                            <i class="bi bi-cash me-1"></i>
+                            <span id="pricePreview">₺0.00</span>
+                        </div>
+                        <div class="badge bg-success p-2 me-2">
+                            <i class="bi bi-ticket-perforated me-1"></i>
+                            <span id="ticketsPreview">0 Bilet</span>
+                        </div>
+                        <div class="badge bg-info p-2">
+                            <i class="bi bi-calendar-day me-1"></i>
+                            <span id="daysPreview">0 Gün</span>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <span class="badge bg-secondary" id="categoryPreview">Kategori Seçilmedi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const title = document.getElementById('@Html.IdFor(x => x.title)');
+        const imageUrl = document.getElementById('@Html.IdFor(x => x.image_url)');
+        const price = document.getElementById('@Html.IdFor(x => x.price)');
+        const totalTickets = document.getElementById('@Html.IdFor(x => x.total_tickets)');
+        const daysTrip = document.getElementById('@Html.IdFor(x => x.days_trip)');
+        const categorySelect = document.getElementById('@Html.IdFor(x => x.category_id)');
+
+        // Önizleme elementleri
+        const titlePreview = document.getElementById('titlePreview');
+        const imagePreview = document.getElementById('imagePreview');
+        const pricePreview = document.getElementById('pricePreview');
+        const ticketsPreview = document.getElementById('ticketsPreview');
+        const daysPreview = document.getElementById('daysPreview');
+        const categoryPreview = document.getElementById('categoryPreview');
+
+        // Önizleme güncelleme fonksiyonları
+        title.addEventListener('input', function() {
+            titlePreview.innerText = this.value || 'Tur Adı';
+        });
+
+        imageUrl.addEventListener('input', function() {
+            imagePreview.src = this.value || 'https://via.placeholder.com/400x300?text=Resim+Önizleme';
+        });
+
+        price.addEventListener('input', function() {
+            const formattedPrice = parseFloat(this.value)
+                ? new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(this.value)
+                : '₺0.00';
+            pricePreview.innerText = formattedPrice;
+        });
+
+        totalTickets.addEventListener('input', function() {
+            ticketsPreview.innerText = `${this.value || 0} Bilet`;
+        });
+
+        daysTrip.addEventListener('input', function() {
+            daysPreview.innerText = `${this.value || 0} Gün`;
+        });
+
+        categorySelect.addEventListener('change', function() {
+            if (this.selectedIndex > 0) {
+                const selectedText = this.options[this.selectedIndex].text;
+                categoryPreview.innerText = selectedText;
+                categoryPreview.className = 'badge bg-primary';
+            } else {
+                categoryPreview.innerText = 'Kategori Seçilmedi';
+                categoryPreview.className = 'badge bg-secondary';
+            }
+        });
+    });
+</script>

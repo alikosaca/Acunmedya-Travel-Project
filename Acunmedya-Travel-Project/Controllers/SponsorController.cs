@@ -20,7 +20,6 @@ namespace Acunmedya_Travel_Project.Controllers
         }
         public ActionResult AddSponsors()
         {
-            //ekleme işlemi
             return View();
         }
         [HttpPost]

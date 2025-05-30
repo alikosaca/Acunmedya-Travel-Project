@@ -12,7 +12,6 @@ namespace Acunmedya_Travel_Project.Controllers
     public class ServiceController : Controller
     {
         Acunmedya_Travel_Project.Concrete.Context _context = new Acunmedya_Travel_Project.Concrete.Context();
-        // GET: Service
         public ActionResult Index()
         {
             var values = _context.Services.ToList();
@@ -26,7 +25,6 @@ namespace Acunmedya_Travel_Project.Controllers
         [HttpPost]
         public ActionResult AddServices(Service service)
         {
-            service.sold_ticket = 0;
             _context.Services.Add(service);
             _context.SaveChanges();
 

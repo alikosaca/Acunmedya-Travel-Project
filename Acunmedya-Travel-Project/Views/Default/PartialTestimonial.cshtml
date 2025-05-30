@@ -1,0 +1,222 @@
+﻿@model List<Acunmedya_Travel_Project.Entities.Testimonial>
+
+<section class="testimonials-section" id="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">Yorumlar</div>
+            <h2 class="section-title">Müşterilerimiz Ne Diyor?</h2>
+            <p class="section-description">
+                Bizimle seyahat eden müşterilerimizin deneyimlerini okuyun ve güvenle rezervasyon yapın.
+            </p>
+        </div>
+        <div class="testimonials-wrapper">
+            <div class="testimonials-track">
+                @foreach (var item in Model)
+                {
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="@item.ImageUrl" alt="@item.Name @item.Surname" class="testimonial-image">
+                            <div class="testimonial-info">
+                                <h5>@item.Name @item.Surname</h5>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">"@item.Description"</p>
+                        <div class="rating-container">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                            </div>
+                            <span class="rating-text">4.5/5</span>
+                        </div>
+                    </div>
+                }
+                
+                @* Animasyon için duplikasyon *@
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model.Take(3))
+                    {
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <img src="@item.ImageUrl" alt="@item.Name @item.Surname" class="testimonial-image">
+                                <div class="testimonial-info">
+                                    <h5>@item.Name @item.Surname</h5>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"@item.Description"</p>
+                            <div class="rating-container">
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                </div>
+                                <span class="rating-text">4.5/5</span>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Testimonials Enhanced Styles */
+    .testimonials-section {
+        padding: 100px 0;
+        background: var(--light-gray);
+    }
+
+    .testimonials-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .testimonials-track {
+        display: flex;
+        gap: 24px;
+        animation: scroll 25s linear infinite;
+    }
+
+    .testimonials-track:hover {
+        animation-play-state: paused;
+    }
+
+    .testimonial-card {
+        background: white;
+        padding: 32px;
+        border-radius: 16px;
+        border: 1px solid var(--border-color);
+        text-align: left;
+        min-width: 360px;
+        position: relative;
+        box-shadow: 0 8px 30px rgba(45, 55, 72, 0.08);
+        transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 45px rgba(45, 55, 72, 0.12);
+        border-color: var(--accent-color);
+    }
+
+    .testimonial-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .testimonial-image {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 16px;
+        border: 3px solid var(--accent-color);
+    }
+
+    .testimonial-info h5 {
+        color: var(--primary-color);
+        margin-bottom: 4px;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .testimonial-position {
+        color: var(--text-light);
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .testimonial-position::before {
+        content: '📍';
+        margin-right: 4px;
+        font-size: 0.8rem;
+    }
+
+    .testimonial-text {
+        color: var(--secondary-color);
+        line-height: 1.6;
+        margin-bottom: 20px;
+        font-size: 0.95rem;
+        font-style: italic;
+    }
+
+    .rating-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--light-gray);
+        padding: 10px 15px;
+        border-radius: 25px;
+        border: 1px solid var(--border-color);
+    }
+
+    .stars {
+        display: flex;
+        gap: 2px;
+    }
+
+    .stars i {
+        color: #ffd700;
+        font-size: 1rem;
+        filter: drop-shadow(0 1px 2px rgba(255, 215, 0, 0.3));
+        transition: transform 0.2s ease;
+    }
+
+    .stars:hover i {
+        transform: scale(1.1);
+    }
+
+    .rating-text {
+        font-size: 0.9rem;
+        color: var(--secondary-color);
+        font-weight: 600;
+        background: white;
+        padding: 4px 8px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+
+    @@keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-384px * 4)); }
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .testimonial-card {
+            min-width: 300px;
+            padding: 24px;
+        }
+        
+        .testimonials-section {
+            padding: 80px 0;
+        }
+        
+        .stars i {
+            font-size: 0.9rem;
+        }
+        
+        .rating-container {
+            padding: 8px 12px;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .testimonial-card {
+            min-width: 280px;
+            padding: 20px;
+        }
+        
+        .testimonials-track {
+            gap: 16px;
+        }
+    }
+</style>

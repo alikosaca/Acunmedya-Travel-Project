@@ -7,13 +7,13 @@ namespace Acunmedya_Travel_Project.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class UpdateServiceTable : IMigrationMetadata
+    public sealed partial class FixServiceRelation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateServiceTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FixServiceRelation));
         
         string IMigrationMetadata.Id
         {
-            get { return "202505231443361_UpdateServiceTable"; }
+            get { return "202505261613286_FixServiceRelation"; }
         }
         
         string IMigrationMetadata.Source

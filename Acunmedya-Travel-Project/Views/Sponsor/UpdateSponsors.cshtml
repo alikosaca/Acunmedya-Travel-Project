@@ -5,14 +5,14 @@
 }
 
 <div class="container-fluid p-4">
-    <h2 class="text-light mb-4 pb-2" style="border-bottom: 2px solid rgba(0, 123, 255, 0.3); font-weight: 300; letter-spacing: 1px;">
-        <i class="bi bi-pencil-square me-2 text-primary"></i>
+    <h2 class="text-light mb-4 pb-2">
+        <i class="bi bi-pencil-square me-2"></i>
         Logo Güncelle
     </h2>
 
     <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
         <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
-            <h5 class="m-0"><i class="bi bi-image me-2 text-info"></i>Logo Bilgilerini Düzenle</h5>
+            <h5 class="m-0"><i class="bi bi-image me-2 text-info" style="margin-right:5px;"></i>Logo Bilgilerini Düzenle</h5>
         </div>
         <div class="card-body">
             <form method="post" enctype="multipart/form-data">
@@ -33,12 +33,12 @@
                 </div>
                 
                 <div class="d-flex justify-content-between align-items-center">
-                    <a href="~/Sponsor/Index" class="btn btn-outline-danger">
-                        <i class="bi bi-x-circle me-2"></i>Vazgeç
+                    <a href="~/Sponsor/Index" class="btn btn-danger">
+                        <i class="bi bi-x-circle me-2" style="margin-right:5px;"></i>Vazgeç
                     </a>
                     
-                    <button type="button" class="btn btn-outline-info" id="btnUpdateSponsor" onclick="confirmUpdate()">
-                        <i class="bi bi-check-circle me-2"></i>Değişiklikleri Kaydet
+                    <button type="button" class="btn btn-info" id="btnUpdateSponsor" onclick="confirmUpdate()">
+                        <i class="bi bi-check-circle me-2" style="margin-right:5px;"></i>Kaydet
                     </button>
                 </div>
             </form>
@@ -49,7 +49,7 @@
         <div class="col-md-6">
             <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
                 <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
-                    <h6 class="m-0"><i class="bi bi-info-circle me-2 text-info"></i>Logo Önizleme</h6>
+                    <h6 class="m-0"><i class="bi bi-info-circle me-2 text-info" style="margin-right:5px;"></i>Logo Önizleme</h6>
                 </div>
                 <div class="card-body">
                     <div class="text-center py-4" style="background-color: rgba(255, 255, 255, 0.03);">
@@ -58,27 +58,12 @@
                     </div>
                     <div class="mt-3">
                         <div class="alert alert-secondary" style="background-color: #131824; border-color: #1a1f2c; color: #adb5bd;">
-                            <small>
+                            <h6>
                                 <i class="bi bi-info-circle me-1"></i>
-                                Logo ID: <span class="badge bg-secondary">@Model.SponsorID</span>
-                            </small>
+                                Logo ID: @Model.SponsorID
+                            </h6>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-6">
-            <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
-                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
-                    <h6 class="m-0"><i class="bi bi-question-circle me-2 text-info"></i>Yardım</h6>
-                </div>
-                <div class="card-body text-light">
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-check text-primary me-2"></i><strong>Logo URL:</strong> Şeffaf arka planlı (PNG/WebP/SVG) logo URL'si ekleyin.</li>
-                        <li class="mb-2"><i class="bi bi-check text-primary me-2"></i><strong>Önerilen Boyut:</strong> 200x100 piksel veya bu orana uygun boyutlarda olmalıdır.</li>
-                        <li class="mb-2"><i class="bi bi-check text-primary me-2"></i><strong>Dosya Formatı:</strong> Şeffaf PNG, WebP veya SVG formatları tercih edilmelidir.</li>
-                    </ul>
                 </div>
             </div>
         </div>

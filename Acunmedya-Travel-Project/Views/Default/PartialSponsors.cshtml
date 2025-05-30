@@ -1,0 +1,46 @@
+﻿@model List<Acunmedya_Travel_Project.Entities.Sponsor>
+
+<section class="sponsors-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">Ortaklarımız</div>
+            <h2 class="section-title">Güvenilir İş Ortakları</h2>
+            <p class="section-description">
+                Kaliteli hizmet için işbirliği yaptığımız sektörün önde gelen kurumları.
+            </p>
+        </div>
+        <div class="sponsors-grid">
+            @foreach(var item in Model)
+            {
+                <div class="sponsor-item">
+                    <img src="@item.ImageUrl" class="sponsor-logo">
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+@*
+
+    <div class="sponsor-item">
+        <img src="https://via.placeholder.com/120x48/2d3748/ffffff?text=THY" alt="Turkish Airlines" class="sponsor-logo">
+    </div>
+    <div class="sponsor-item">
+        <img src="https://via.placeholder.com/120x48/2d3748/ffffff?text=HILTON" alt="Hilton" class="sponsor-logo">
+    </div>
+    <div class="sponsor-item">
+        <img src="https://via.placeholder.com/120x48/2d3748/ffffff?text=BOOKING" alt="Booking.com" class="sponsor-logo">
+    </div>
+    <div class="sponsor-item">
+        <img src="https://via.placeholder.com/120x48/2d3748/ffffff?text=EXPEDIA" alt="Expedia" class="sponsor-logo">
+    </div>
+    <div class="sponsor-item">
+        <img src="https://via.placeholder.com/120x48/2d3748/ffffff?text=MARRIOTT" alt="Marriott" class="sponsor-logo">
+    </div>
+    <div class="sponsor-item">
+        <img src="https://via.placeholder.com/120x48/2d3748/ffffff?text=EMIRATES" alt="Emirates" class="sponsor-logo">
+    </div>
+
+
+*@

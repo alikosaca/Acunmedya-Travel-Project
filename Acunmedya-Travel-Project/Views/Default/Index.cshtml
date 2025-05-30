@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        @Html.Action("PartialHead", "Default")
+    </head>
+    <body>
+        <!-- Navbar -->
+        @Html.Action("PartialNavbar", "Default")
+
+        <!-- Anasayfa -->
+        @Html.Action("PartialHome", "Default")
+
+        <!-- Services Section -->
+        @Html.Action("PartialService", "Default")
+
+        <!-- Booking Section -->
+        @Html.Action("PartialBooking", "Default")
+
+        <!-- Steps Section -->
+        @Html.Action("PartialHelper", "Default")
+
+        <!-- Testimonials Section -->
+        @Html.Action("PartialTestimonial", "Default")
+
+        <!-- Sponsors Section -->
+        @Html.Action("PartialSponsors", "Default")
+
+        <!-- Newsletter Section -->
+        @Html.Action("PartialNewsletter", "Default")
+
+        <!-- Footer -->
+        @Html.Action("PartialFooter", "Default")
+
+        @Html.Action("PartialScript", "Default")
+    </body>
+</html>

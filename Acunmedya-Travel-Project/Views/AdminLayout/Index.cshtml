@@ -10,26 +10,28 @@
     @Html.Action("PartialHead", "AdminLayout")
 </head>
 <body>
-        <!-- partial:partials/_navbar.html -->
-        @Html.Action("PartialNavbar", "AdminLayout")
-        <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_sidebar.html -->
-            @Html.Action("PartialSider", "AdminLayout")
-            <!-- partial -->
-            <div class="main-panel">
-                @RenderBody()
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    @Html.Action("PartialFooter", "AdminLayout")
-                </footer>
+    <!-- partial:partials/_navbar.html -->
+    @Html.Action("PartialNavbar", "AdminLayout")
+    <br />
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
 
-                <!-- partial -->
-            </div>
-            <!-- main-panel ends -->
+        <!-- partial:partials/_sidebar.html -->
+        @Html.Action("PartialSider", "AdminLayout")
+        <!-- partial -->
+        <div class="main-panel">
+            @RenderBody()
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                @Html.Action("PartialFooter", "AdminLayout")
+            </footer>
+
+            <!-- partial -->
         </div>
-        <!-- page-body-wrapper ends -->
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
     </div>
     @Html.Action("PartialScript", "AdminLayout")
 </body>

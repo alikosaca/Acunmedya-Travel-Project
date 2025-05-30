@@ -129,6 +129,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Concrete\Context.cs" />
     <Compile Include="Controllers\AdminLayoutController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\DestinationController.cs" />
+    <Compile Include="Controllers\ErrorPagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
@@ -144,13 +148,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202505231443361_UpdateServiceTable.cs" />
-    <Compile Include="Migrations\202505231443361_UpdateServiceTable.Designer.cs">
-      <DependentUpon>202505231443361_UpdateServiceTable.cs</DependentUpon>
+    <Compile Include="Migrations\202505261448416_InitialCreate.cs" />
+    <Compile Include="Migrations\202505261448416_InitialCreate.Designer.cs">
+      <DependentUpon>202505261448416_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202505231640364_UpdateServiceTable_sold_ticket-and-sold_ticket-change-Nullable.cs" />
-    <Compile Include="Migrations\202505231640364_UpdateServiceTable_sold_ticket-and-sold_ticket-change-Nullable.Designer.cs">
-      <DependentUpon>202505231640364_UpdateServiceTable_sold_ticket-and-sold_ticket-change-Nullable.cs</DependentUpon>
+    <Compile Include="Migrations\202505261613286_FixServiceRelation.cs" />
+    <Compile Include="Migrations\202505261613286_FixServiceRelation.Designer.cs">
+      <DependentUpon>202505261613286_FixServiceRelation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1058,11 +1062,27 @@
     <Content Include="Views\Testimonial\Index.cshtml" />
     <Content Include="Views\Testimonial\AddTestimonial.cshtml" />
     <Content Include="Views\Testimonial\UpdateTestimonial.cshtml" />
+    <Content Include="Views\Destination\Index.cshtml" />
+    <Content Include="Views\Destination\AddDestination.cshtml" />
+    <Content Include="Views\Destination\UpdateDestination.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="Views\Default\PartialHead.cshtml" />
+    <Content Include="Views\Default\PartialNavbar.cshtml" />
+    <Content Include="Views\Default\PartialHome.cshtml" />
+    <Content Include="Views\Default\PartialService.cshtml" />
+    <Content Include="Views\Default\PartialBooking.cshtml" />
+    <Content Include="Views\Default\PartialHelper.cshtml" />
+    <Content Include="Views\Default\PartialTestimonial.cshtml" />
+    <Content Include="Views\Default\PartialSponsors.cshtml" />
+    <Content Include="Views\Default\PartialNewsletter.cshtml" />
+    <Content Include="Views\Default\PartialFooter.cshtml" />
+    <Content Include="Views\Default\PartialScript.cshtml" />
+    <Content Include="Views\ErrorPages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -1092,11 +1112,11 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202505231443361_UpdateServiceTable.resx">
-      <DependentUpon>202505231443361_UpdateServiceTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202505261448416_InitialCreate.resx">
+      <DependentUpon>202505261448416_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505231640364_UpdateServiceTable_sold_ticket-and-sold_ticket-change-Nullable.resx">
-      <DependentUpon>202505231640364_UpdateServiceTable_sold_ticket-and-sold_ticket-change-Nullable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202505261613286_FixServiceRelation.resx">
+      <DependentUpon>202505261613286_FixServiceRelation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

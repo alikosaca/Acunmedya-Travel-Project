@@ -1,0 +1,181 @@
+﻿@model List<Acunmedya_Travel_Project.Entities.Destination>
+
+<section class="booking-section" id="booking">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">Rezervasyon</div>
+            <h2 class="section-title">Popüler Destinasyonlar</h2>
+            <p class="section-description">
+                Dünyanın dört bir yanındaki eşsiz destinasyonları keşfedin ve hayalinizdeki seyahati planlayın.
+            </p>
+        </div>
+
+        <div class="continent-tabs">
+            <button class="continent-tab active" onclick="filterByContinent('all')">Tümü</button>
+            <button class="continent-tab" onclick="filterByContinent('1')">Avrupa</button>
+            <button class="continent-tab" onclick="filterByContinent('2')">Asya</button>
+            <button class="continent-tab" onclick="filterByContinent('4')">Afrika</button>
+            <button class="continent-tab" onclick="filterByContinent('3')">Amerika</button>
+            <button class="continent-tab" onclick="filterByContinent('5')">Avustralya</button>
+        </div>
+
+        <div class="tours-container">
+            <div class="tours-scroll" id="tours-content">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var destination in Model)
+                    {
+                        <div class="tour-card" data-category="@destination.category_id">
+                            <img src="@destination.image_url" alt="@destination.title" class="tour-image">
+                            <div class="tour-content">
+                                <div class="tour-price">₺@destination.price.ToString("N0")</div>
+                                <h5>@destination.title</h5>
+                                <p>@destination.description</p>
+                                <a href="/Destination/Details/@destination.destination_id" class="btn">Detayları Gör</a>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="no-tours-message">
+                        <div class="text-center">
+                            <i class="bi bi-airplane" style="font-size: 3rem; color: var(--text-light); margin-bottom: 1rem;"></i>
+                            <h4 style="color: var(--secondary-color);">Henüz Tur Bulunmuyor</h4>
+                            <p style="color: var(--text-light);">Yakında yeni turlar eklenecek. Lütfen daha sonra tekrar kontrol edin.</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Kıta filtresi için JavaScript - Category ID'ye göre
+    function filterByContinent(categoryId) {
+        // Aktif tab'ı güncelle
+        document.querySelectorAll('.continent-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        event.target.classList.add('active');
+
+        // Tour kartlarını filtrele
+        const tourCards = document.querySelectorAll('.tour-card');
+        
+        tourCards.forEach(card => {
+            const cardCategoryId = card.getAttribute('data-category');
+            
+            if (categoryId === 'all' || cardCategoryId === categoryId) {
+                card.style.display = 'block';
+                card.style.animation = 'fadeIn 0.5s ease-in-out';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Görünür kart sayısını kontrol et
+        const visibleCards = Array.from(tourCards).filter(card => 
+            card.style.display !== 'none'
+        );
+        
+        const toursContent = document.getElementById('tours-content');
+        let tempMessage = document.querySelector('.temp-no-tours');
+        
+        if (visibleCards.length === 0 && categoryId !== 'all') {
+            // Kıta adını al
+            const continentNames = {
+                '1': 'Avrupa',
+                '2': 'Asya', 
+                '3': 'Amerika',
+                '4': 'Afrika',
+                '5': 'Avustralya'
+            };
+            
+            const continentName = continentNames[categoryId] || 'Bu kıta';
+            
+            // "Bulunamadı" mesajı göster
+            if (!tempMessage) {
+                tempMessage = document.createElement('div');
+                tempMessage.className = 'temp-no-tours';
+                tempMessage.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--text-light);">
+                        <i class="bi bi-search" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                        <h5>${continentName}'da henüz tur bulunmuyor</h5>
+                        <p>Diğer kıtalardaki turları keşfetmek için farklı sekmeler deneyebilirsiniz.</p>
+                    </div>
+                `;
+                toursContent.appendChild(tempMessage);
+            }
+        } else {
+            // Geçici mesajı kaldır
+            if (tempMessage) {
+                tempMessage.remove();
+            }
+        }
+    }
+
+    // Sayfa yüklendiğinde tüm kartları göster
+    document.addEventListener('DOMContentLoaded', function() {
+        filterByContinent('all');
+    });
+
+    // CSS stilleri
+    const style = document.createElement('style');
+    style.textContent = `
+        @@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .no-tours-message {
+            width: 100%;
+            padding: 60px 20px;
+            text-align: center;
+            background: white;
+            border-radius: 16px;
+            border: 1px dashed var(--border-color);
+            margin: 20px 0;
+        }
+        
+        .temp-no-tours {
+            width: 100%;
+            min-width: 100%;
+            padding: 20px;
+        }
+        
+        .tour-card {
+            display: block;
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .tours-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+        }
+        
+        .tour-card {
+            min-width: 280px;
+            max-width: 280px;
+            flex-shrink: 0;
+        }
+        
+        @@media (max-width: 768px) {
+            .tours-scroll {
+                flex-direction: column;
+                overflow-x: visible;
+            }
+            
+            .tour-card {
+                min-width: 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+</script>

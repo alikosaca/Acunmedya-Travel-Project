@@ -7,13 +7,13 @@ namespace Acunmedya_Travel_Project.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class UpdateServiceTable_sold_ticketandsold_ticketchangeNullable : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateServiceTable_sold_ticketandsold_ticketchangeNullable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "202505231640364_UpdateServiceTable_sold_ticket-and-sold_ticket-change-Nullable"; }
+            get { return "202505261448416_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

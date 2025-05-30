@@ -1,0 +1,74 @@
+﻿@model List<Acunmedya_Travel_Project.Entities.Service>
+
+<section class="services-section" id="services">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">Hizmetlerimiz</div>
+            <h2 class="section-title">Neden Bizi Tercih Etmelisiniz?</h2>
+            <p class="section-description">
+                Size en iyi seyahat deneyimini sunmak için her detayı titizlikle planlıyor,
+                kaliteli hizmet anlayışımızla yanınızda oluyoruz.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            @foreach(var item in Model)
+            {
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon-wrapper">
+                            <img src="@item.image_url" alt="@item.title" class="service-icon" />
+                        </div>
+                        <h4>@item.title</h4>
+                        <p>@item.description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+
+</style>
+
+@*
+
+    <div class="col-lg-3 col-md-6">
+        <div class="service-card">
+            <div class="service-icon-wrapper">
+                <i class="bi bi-cloud-sun service-icon"></i>
+            </div>
+            <h4>Hava Durumu Takibi</h4>
+            <p>Seyahatiniz boyunca güncel hava durumu bilgilerini takip edin ve planlarınızı güvenle yapın.</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="service-card">
+            <div class="service-icon-wrapper">
+                <i class="bi bi-airplane service-icon"></i>
+            </div>
+            <h4>En İyi Uçuşlar</h4>
+            <p>Güvenilir havayolu ortaklarımızla en uygun fiyatlarla konforlu uçuş seçenekleri sunuyoruz.</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="service-card">
+            <div class="service-icon-wrapper">
+                <i class="bi bi-calendar-event service-icon"></i>
+            </div>
+            <h4>Yerel Etkinlikler</h4>
+            <p>Destinasyonlardaki özel etkinlikleri kaçırmayın, kültürel deneyimlerle anılarınızı zenginleştirin.</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="service-card">
+            <div class="service-icon-wrapper">
+                <i class="bi bi-gear service-icon"></i>
+            </div>
+            <h4>Kişiselleştirme</h4>
+            <p>İhtiyaçlarınıza özel hazırlanmış seyahat paketleri ile tamamen size özel deneyimler yaşayın.</p>
+        </div>
+    </div>
+
+*@

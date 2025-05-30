@@ -8,70 +8,40 @@
 
 
 <div class="container-fluid p-4">
-    <h2 class="text-light mb-4 pb-2" style="border-bottom: 2px solid rgba(255, 0, 0, 0.1); font-weight: 300; letter-spacing: 1px;">
-        <i class="bi bi-journal-code me-2"></i>
-        Turlar Listesi
+    <h2 class="text-light mb-4 pb-2">
+        <i class="bi bi-database me-2"></i>
+        Hizmetler
     </h2>
 
     <table class="table table-dark table-hover table-striped table-bordered table-sm" style="background-color: rgba(33, 37, 41, 0.9);">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Görsel</th>
-                <th scope="col">Başlık</th>
-                <th scope="col">Açıklama</th>
-                <th scope="col">Fiyat</th>
-                <th scope="col">Satılan Bilet</th>
-                <th scope="col">Güncelle</th>
-                <th scope="col">Sil</th>
+                <th scope="col" style="text-align: center;">#</th>
+                <th scope="col" style="text-align: center;">Görsel</th>
+                <th scope="col" style="text-align: center;">Başlık</th>
+                <th scope="col" style="text-align: center;">Açıklama</th>
+                <th scope="col" style="text-align: center;">Güncelle</th>
+                <th scope="col" style="text-align: center;">Sil</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                /**/
-                double? yuzde = item.sold_ticket == 0 ? 0 : ((double)item.sold_ticket / item.total_tickets) * 100;
-                int yuvarlanmisYuzde = yuzde == 0 ? 0 : (int)Math.Round(yuzde ?? 0);
-
-                string progressColorClass = yuvarlanmisYuzde < 30 ? "bg-danger" : (yuvarlanmisYuzde < 70 ? "bg-warning" : "bg-success");
-
-                if (item.sold_ticket == 0)
-                {
-                    progressColorClass = "bg-danger";
-                    yuvarlanmisYuzde = 100;
-                }
-
-                /*bg-danger  bg-warning  bg-success*/
                 <tr>
-                    <th scope="row">@item.service_id</th>
-                    <td><img src="@item.image_url" width="100" height="70" class="img-thumbnail text-nowrap" /></td>
-                    <td class="text-nowrap">@item.title</td>
+                    <th scope="row" style="width: 50px; white-space: nowrap; text-align: center;">@item.service_id</th>
+                    <td style="width: 50px; white-space: nowrap; text-align: center;"><img src="@item.image_url" width="100" height="70" class="img-thumbnail text-nowrap" /></td>
+                    <td class="text-nowrap" style="width: 100px; white-space: nowrap; text-align: center;">@item.title</td>
                     <td>
-                        <div style="max-height: 100px; overflow-y: auto;">
-                            @item.description
+                        <div style="max-height: 50px; overflow-y: auto; max-width: 200px; text-overflow: ellipsis;">
+                            <small>@item.description</small>
                         </div>
-                    </td>
-                    <td>
-                        @item.price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("tr-TR"))
                     </td>
 
-                    <td style="width: 100px;">
-                        <div class="progress" style="height: 25px;">
-                            <div class="progress-bar @progressColorClass progress-bar-striped progress-bar-animated"
-                                 role="progressbar"
-                                 style="width: @yuvarlanmisYuzde%"
-                                 aria-valuenow="@yuvarlanmisYuzde"
-                                 aria-valuemin="0"
-                                 aria-valuemax="100">
-                                @item.sold_ticket / @item.total_tickets
-                            </div>
-                        </div>
-                    </td>
-                    <td style="width: 150px; text-align: center;">
+                    <td style="width: 50px; text-align: center;">
                         <a href="~/Service/UpdateServices/@item.service_id" class="btn btn-info btn-sm px-3">Güncelle</a>
                     </td>
-                    <td style="width: 150px; text-align: center;">
-                        <button class="btn btn-danger btn-sm px-3" 
+                    <td style="width: 50px; text-align: center;">
+                        <button class="btn btn-danger btn-sm px-3"
                                 onclick="confirmDelete(@item.service_id, '@item.title', '@item.image_url')">
                             Sil
                         </button>
@@ -91,7 +61,7 @@
         Swal.fire({
             background: '#000',
             color: '#fff',
-            title: `"${title}" turunu silmek istediğinize emin misiniz?`,
+            title: `"${title}" Servisi silmek istediğinize emin misiniz?`,
             text: "Bu işlem geri alınamaz!",
             imageUrl: imageUrl,
             imageWidth: 300,
@@ -106,7 +76,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Silme işlemi için yönlendirme
-                window.location.href = `/Service/Index/${id}`;
+                window.location.href = `/Service/DeleteServices/${id}`;
             }
         });
     }

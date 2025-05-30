@@ -13,6 +13,7 @@ namespace Acunmedya_Travel_Project.Controllers
         Acunmedya_Travel_Project.Concrete.Context _context = new Acunmedya_Travel_Project.Concrete.Context();
         public ActionResult Index()
         {
+            ViewBag.TotalTestimonial = _context.Testimonials.Count();
             var values = _context.Testimonials.ToList();
             return View(values);
         }

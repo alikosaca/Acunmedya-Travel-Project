@@ -5,15 +5,15 @@
 }
 
 <div class="container-fluid p-4">
-    <h2 class="text-light mb-4 pb-2" style="border-bottom: 2px solid rgba(0, 123, 255, 0.3); font-weight: 300; letter-spacing: 1px;">
-        <i class="bi bi-chat-quote me-2 text-primary"></i>
+    <h2 class="text-light mb-4 pb-2">
+        <i class="bi bi-chat-quote me-2"></i>
         Müşteri Yorumları
     </h2>
 
     <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
         <div class="card-header text-light d-flex justify-content-between align-items-center" style="background-color: #0d1321; border-color: #1a1f2c;">
-            <h5 class="m-0"><i class="bi bi-people me-2 text-info"></i>Yorum Listesi</h5>
-            <a href="~/Testimonial/AddTestimonial" class="btn btn-outline-success">
+            <h5 class="m-0"></h5>
+            <a href="~/Testimonial/AddTestimonial" class="btn btn-warning">
                 <i class="bi bi-plus-circle me-2"></i>Yeni Yorum Ekle
             </a>
         </div>
@@ -28,7 +28,7 @@
                                 <div class="card-header d-flex justify-content-between align-items-center" style="background-color: rgba(13, 19, 33, 0.7); border-color: #1a1f2c;">
                                     <span class="text-muted">#@item.TestimonialID</span>
                                     <div class="btn-group">
-                                        <a href="~/Testimonial/UpdateTestimonial/@item.TestimonialID" class="btn btn-info">
+                                        <a href="~/Testimonial/UpdateTestimonial/@item.TestimonialID" class="btn btn-info" style="margin-right:10px">
                                             <i class="bi bi-pencil me-1"></i>Düzenle
                                         </a>
                                         <button class="btn btn-danger" onclick="confirmDelete(@item.TestimonialID, '@(item.Name + " " + item.Surname)', '@item.ImageUrl')">
@@ -39,7 +39,7 @@
                                 <div class="card-body">
                                     <div class="d-flex mb-3">
                                         <img src="@item.ImageUrl" alt="@item.Name" class="rounded-circle me-3" width="64" height="64" 
-                                             style="border: 2px solid #1a1f2c; object-fit: cover;" 
+                                             style="border: 2px solid #1a1f2c; object-fit: cover; margin-right:10px;" 
                                              onerror="this.src='https://via.placeholder.com/64x64?text=?'; this.onerror='';" />
                                         <div>
                                             <h5 class="text-light mb-1">@item.Name @item.Surname</h5>
@@ -75,7 +75,7 @@
         </div>
         <div class="card-footer text-light bg-transparent" style="border-color: #1a1f2c;">
             <div class="d-flex justify-content-between align-items-center">
-                <small>Toplam Yorum: <span class="badge bg-primary">@Model?.Count()</span></small>
+                <h5>Toplam Yorum: <span class="">@ViewBag.TotalTestimonial</span></h5>
                 <a href="~/Home/Index#testimonials" target="_blank" class="btn btn-sm btn-outline-light">
                     <i class="bi bi-eye me-1"></i>Site Üzerinde Gör
                 </a>
@@ -83,42 +83,7 @@
         </div>
     </div>
     
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
-                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
-                    <h6 class="m-0"><i class="bi bi-info-circle me-2 text-info"></i>Müşteri Yorumları Hakkında</h6>
-                </div>
-                <div class="card-body text-light">
-                    <p>Müşteri yorumları, web sitenizin güvenilirliğini artıran önemli elemanlardır. Bu sayfadan tüm müşteri yorumlarını yönetebilirsiniz.</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Müşteri yorumları anasayfada gösterilir</li>
-                        <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Yüksek kaliteli fotoğraflar kullanmanız önerilir</li>
-                        <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Yorumların kısa ve öz olması daha etkilidir</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-6">
-            <div class="card mb-4" style="background-color: #0a0e17; border-color: #1a1f2c;">
-                <div class="card-header text-light" style="background-color: #0d1321; border-color: #1a1f2c;">
-                    <h6 class="m-0"><i class="bi bi-lightbulb me-2 text-warning"></i>İpuçları</h6>
-                </div>
-                <div class="card-body text-light">
-                    <div class="alert alert-dark" style="background-color: #131824; border-color: #1a1f2c;">
-                        <h6><i class="bi bi-stars text-warning me-2"></i>Etkili Müşteri Yorumları İçin:</h6>
-                        <ul>
-                            <li>Gerçek müşterilerinizden gelen yorumları kullanın</li>
-                            <li>Mümkünse yüksek kaliteli müşteri fotoğrafları ekleyin</li>
-                            <li>Kısa, samimi ve özgün yorumlar seçin</li>
-                            <li>Tur deneyimine odaklanan içerikler kullanın</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 <script>

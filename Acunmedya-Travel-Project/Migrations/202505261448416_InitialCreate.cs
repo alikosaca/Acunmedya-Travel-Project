@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UpdateServiceTable : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -30,13 +30,19 @@
                 "dbo.Destinations",
                 c => new
                     {
-                        DestinationID = c.Int(nullable: false, identity: true),
-                        Title = c.String(),
-                        Price = c.Int(nullable: false),
-                        DaysTrip = c.String(),
-                        ImageUrl = c.String(),
+                        destination_id = c.Int(nullable: false, identity: true),
+                        title = c.String(),
+                        description = c.String(),
+                        image_url = c.String(),
+                        days_trip = c.String(),
+                        total_tickets = c.Int(nullable: false),
+                        sold_ticket = c.Int(nullable: false),
+                        price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        category_id = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.DestinationID);
+                .PrimaryKey(t => t.destination_id)
+                .ForeignKey("dbo.Categories", t => t.category_id, cascadeDelete: true)
+                .Index(t => t.category_id);
             
             CreateTable(
                 "dbo.Services",
@@ -88,6 +94,8 @@
         
         public override void Down()
         {
+            DropForeignKey("dbo.Destinations", "category_id", "dbo.Categories");
+            DropIndex("dbo.Destinations", new[] { "category_id" });
             DropTable("dbo.Testimonials");
             DropTable("dbo.Sponsors");
             DropTable("dbo.Sliders");

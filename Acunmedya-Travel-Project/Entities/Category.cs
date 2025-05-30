@@ -9,6 +9,6 @@ namespace Acunmedya_Travel_Project.Entities
     {
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
-
+        public List<Destination> Destinations { get; set; }
     }
 }
